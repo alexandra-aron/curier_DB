@@ -1,9 +1,9 @@
 -- Toate coletele cu numele curierului
 
 SELECT
-c.id_colet,
-cu.nume AS curier,
-c.status
+  c.id_colet,
+  cu.nume AS curier,
+  c.status
 FROM colete c
 JOIN livrari l ON c.id_colet = l.id_colet
 JOIN curieri cu ON l.id_curier = cu.id_curier;
@@ -11,8 +11,8 @@ JOIN curieri cu ON l.id_curier = cu.id_curier;
 -- Numar livrari per curier
 
 SELECT
-cu.nume,
-COUNT(*) AS numar_livrari
+  cu.nume,
+  COUNT(*) AS numar_livrari
 FROM curieri cu
 JOIN livrari l ON cu.id_curier = l.id_curier
 GROUP BY cu.nume;
