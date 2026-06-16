@@ -27,8 +27,7 @@ CREATE TABLE vehicule (
     nr_inmatriculare VARCHAR(20) UNIQUE NOT NULL,
     tip VARCHAR(50),
     id_curier INT,
-    FOREIGN KEY (id_curier)
-        REFERENCES curieri(id_curier)
+    FOREIGN KEY (id_curier) REFERENCES curieri(id_curier)
 );
 
 -- =========================
@@ -53,14 +52,10 @@ CREATE TABLE colete (
     adresa_livrare INT NOT NULL,
     greutate_kg NUMERIC(10,2) CHECK (greutate_kg > 0),
     status VARCHAR(30) DEFAULT 'INREGISTRAT',
-    FOREIGN KEY (id_client_expeditor)
-        REFERENCES clienti(id_client),
-    FOREIGN KEY (id_client_destinatar)
-        REFERENCES clienti(id_client),
-    FOREIGN KEY (adresa_ridicare)
-        REFERENCES adrese(id_adresa),
-    FOREIGN KEY (adresa_livrare)
-        REFERENCES adrese(id_adresa)
+    FOREIGN KEY (id_client_expeditor) REFERENCES clienti(id_client),
+    FOREIGN KEY (id_client_destinatar) REFERENCES clienti(id_client),
+    FOREIGN KEY (adresa_ridicare) REFERENCES adrese(id_adresa),
+    FOREIGN KEY (adresa_livrare) REFERENCES adrese(id_adresa)
 );
 
 -- =========================
@@ -74,10 +69,8 @@ CREATE TABLE livrari (
     id_curier INT NOT NULL,
     data_preluare TIMESTAMP,
     data_livrare TIMESTAMP,
-    FOREIGN KEY (id_colet)
-        REFERENCES colete(id_colet),
-    FOREIGN KEY (id_curier)
-        REFERENCES curieri(id_curier)
+    FOREIGN KEY (id_colet) REFERENCES colete(id_colet),
+    FOREIGN KEY (id_curier) REFERENCES curieri(id_curier)
 );
 
 -- =========================
@@ -89,6 +82,5 @@ CREATE TABLE plati (
         PRIMARY KEY,
     id_colet INT NOT NULL,
     suma NUMERIC(12,2) NOT NULL CHECK (suma > 0),
-    FOREIGN KEY (id_colet)
-        REFERENCES colete(id_colet)
+    FOREIGN KEY (id_colet) REFERENCES colete(id_colet)
 );
