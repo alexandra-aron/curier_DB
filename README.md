@@ -1,47 +1,46 @@
-# 🚚 Curier Database Project
+# Courier Company Database
 
-## 📌 Descriere
-Acest proiect reprezintă o bază de date relațională pentru gestionarea unei firme de curierat.  
-Include gestionarea clienților, curierilor, vehiculelor, adreselor, coletelor, livrărilor și plăților.
+A PostgreSQL database for a small courier company. I built it to practise relational modelling on something with a bit more going on than a typical "students and courses" example: clients, couriers, vehicles, addresses, parcels, deliveries and payments.
 
-Proiectul este realizat în PostgreSQL și are ca scop modelarea unei baze de date relaționale cu integritate referențială și relații între tabele.
+Table and column names are in Romanian (`clienti` = clients, `curieri` = couriers, `colete` = parcels, `livrari` = deliveries, `plati` = payments).
 
----
+## How the data fits together
 
-## 🛠️ Tehnologii utilizate
-- PostgreSQL
-- SQL (DDL, DML)
+- a client can send many parcels
+- every parcel has a sender and a recipient, both stored in `clienti`
+- a courier can deliver many parcels
+- each parcel has one delivery record and one payment
 
----
+The full diagram is at the bottom of this page.
 
-## 📂 Structura bazei de date
-- clienti
-- curieri
-- vehicule
-- adrese
-- colete
-- livrari
-- plati
+## What's in the repo
 
----
+The files are numbered in the order they should be run:
 
-## 🔗 Relații între tabele
-- Un client poate trimite mai multe colete
-- Un colet are un expeditor și un destinatar
-- Un curier poate livra mai multe colete
-- Fiecare colet are o livrare asociată
-- Fiecare colet are o plată asociată
+| File | What it does |
+|---|---|
+| `1_schema.sql` | creates the tables, keys and constraints |
+| `2_dummy_data.sql` | fills the tables with test data |
+| `3_examples_queries_1.sql` | example queries (joins, aggregates) |
+| `4_views.sql` | views, e.g. delivery details and per-courier statistics |
+| `5_functions.sql` | functions such as total revenue or number of deliveries for a courier |
+| `6_procedures.sql` | procedures for adding a parcel and updating its status |
+| `7_triggers.sql` | a trigger that logs every status change of a parcel into a history table |
 
----
-
-## 🚀 Cum se rulează proiectul
-
-Se creează baza de date în PostgreSQL:
+## Running it
 
 ```sql
 CREATE DATABASE curier_db;
 ```
 
-## 🗺️ Diagrama bazei de date
+Then connect to `curier_db` and run the files from 1 to 7, for example in psql:
+
+```
+\i 1_schema.sql
+\i 2_dummy_data.sql
+...
+```
+
+## Database diagram
 
 ![ERD](erd.png)
